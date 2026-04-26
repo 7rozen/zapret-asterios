@@ -1,0 +1,19 @@
+# Name        : .asteriosgame-redirect.txt
+# Author      : 7rozen
+# Date        : 2026.06.21
+# GitHub      : https://github.com/7rozen/zapret-asterios
+# Description : Данный пресет используется для перенаправления трафика.
+
+--wf-tcp-out=2100-2110
+--wf-tcp-in=2100-2110
+--wf-tcp-empty=2100-2110
+--wf-filter-lan=0
+--lua-init=@./lua/zapret-lib.lua
+--lua-init=@./lua/zapret-antidpi.lua
+--lua-init=@./lua/custom-redirect.lua
+
+--filter-tcp=2100-2110
+--filter-l3=ipv4
+--in-range=a
+--ipset=./lists/ipset-asteriosgame-redirect.txt
+--lua-desync=custom_redirect:ip=/bin/configs/redirect

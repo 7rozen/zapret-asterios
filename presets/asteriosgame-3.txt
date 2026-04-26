@@ -1,0 +1,23 @@
+# Name        : ASTERIOSGAME #3
+# Author      : 7rozen
+# Date        : 2026.06.21
+# GitHub      : https://github.com/7rozen/zapret-asterios
+# Description : Данный пресет использует стратегии обхода DPI только для игры астериос. Устойчив к динамическим блокировкам.
+
+--wf-tcp-out=2100-2110
+--lua-init=@./lua/zapret-lib.lua
+--lua-init=@./lua/zapret-antidpi.lua
+--blob=stun:@./fakes/stun.bin
+--blob=ssh:@./fakes/ssh.bin
+
+--filter-tcp=2100-2110
+--filter-l3=ipv4
+--out-range=d1-d1
+--ipset-ip=178.57.220.85,95.183.13.236
+--lua-desync=fake:payload=all:blob=ssh:tcp_ts=-100000:ip_autottl=-2,3-64
+
+--filter-tcp=2100-2110
+--filter-l3=ipv4
+--out-range=d1-d1
+--ipset=./lists/ipset-asteriosgame.txt
+--lua-desync=fake:payload=all:blob=stun:tcp_ts=-100000:ip_autottl=-2,3-64
