@@ -1,0 +1,185 @@
+# Name        : ALL #2
+# Author      : 7rozen
+# Date        : 2026.06.21
+# GitHub      : https://github.com/7rozen/zapret-asterios
+# Description : Данный пресет использует стратегии обхода DPI для всего трафика.
+
+--wf-tcp-out=80,443,1024-65535
+--wf-udp-out=443,500,1024-65535
+--lua-init=@./lua/zapret-lib.lua
+--lua-init=@./lua/zapret-antidpi.lua
+--blob=tls_google:@./fakes/tls_clienthello_www_google_com.bin
+--blob=quic_google:@./fakes/quic_initial_www_google_com.bin
+--blob=ssh:@./fakes/ssh.bin
+
+--template=tpl_syn_http_s_base
+--filter-tcp=80,443
+--out-range=-d0
+--lua-desync=send
+
+--new
+--import tpl_syn_http_s_base
+--hostlist=./lists/list-russia-exclude.txt
+--hostlist=./lists/user/list-user-exclude.txt
+--ipset=./lists/user/ipset-user-exclude.txt
+
+--new
+--import tpl_syn_http_s_base
+--ipset=./lists/ipset-akamai-as16625.txt
+--lua-desync=syndata:payload=all:blob=tls_google:tls_mod=rnd,sni=www.microsoft.com:tcp_ts=-100000:ip_autottl=-2,3-64:ip6_autottl=-2,3-64
+
+--new
+--import tpl_syn_http_s_base
+--ipset=./lists/ipset-akamai-as20940.txt
+--lua-desync=syndata:payload=all:blob=tls_google:tls_mod=rnd,sni=www.nvidia.com:tcp_ts=-100000:ip_autottl=-2,3-64:ip6_autottl=-2,3-64
+
+--new
+--import tpl_syn_http_s_base
+--ipset=./lists/ipset-akamai-as63949.txt
+--lua-desync=syndata:payload=all:blob=tls_google:tls_mod=rnd,sni=kernel.org:tcp_ts=-100000:ip_autottl=-2,3-64:ip6_autottl=-2,3-64
+
+--new
+--import tpl_syn_http_s_base
+--ipset=./lists/ipset-aquaray-as41653.txt
+--lua-desync=syndata:payload=all:blob=tls_google:tls_mod=rnd,sni=www.aquaray.com:tcp_ts=-100000:ip_autottl=-2,3-64:ip6_autottl=-2,3-64
+
+--new
+--import tpl_syn_http_s_base
+--ipset=./lists/ipset-aws-as14618.txt
+--lua-desync=syndata:payload=all:blob=tls_google:tls_mod=rnd,sni=nvidia.com:tcp_ts=-100000:ip_autottl=-2,3-64:ip6_autottl=-2,3-64
+
+--new
+--import tpl_syn_http_s_base
+--ipset=./lists/ipset-aws-as16509.txt
+--lua-desync=syndata:payload=all:blob=tls_google:tls_mod=rnd,sni=www.opera.com:tcp_ts=-100000:ip_autottl=-2,3-64:ip6_autottl=-2,3-64
+
+--new
+--import tpl_syn_http_s_base
+--ipset=./lists/ipset-cdn77-as60068.txt
+--lua-desync=syndata:payload=all:blob=tls_google:tls_mod=rnd,sni=docs.plesk.com:tcp_ts=-100000:ip_autottl=-2,3-64:ip6_autottl=-2,3-64
+
+--new
+--import tpl_syn_http_s_base
+--ipset=./lists/ipset-cdn77-as212238.txt
+--lua-desync=syndata:payload=all:blob=tls_google:tls_mod=rnd,sni=packagist.org:tcp_ts=-100000:ip_autottl=-2,3-64:ip6_autottl=-2,3-64
+
+--new
+--import tpl_syn_http_s_base
+--ipset=./lists/ipset-cdnvideo-as57363.txt
+--lua-desync=syndata:payload=all:blob=tls_google:tls_mod=rnd,sni=i0.photo.2gis.com:tcp_ts=-100000:ip_autottl=-2,3-64:ip6_autottl=-2,3-64
+
+--new
+--import tpl_syn_http_s_base
+--ipset=./lists/ipset-cloudflare-as13335.txt
+--lua-desync=syndata:payload=all:blob=tls_google:tls_mod=rnd,sni=www.onetrust.com:tcp_ts=-100000:ip_autottl=-2,3-64:ip6_autottl=-2,3-64
+
+--new
+--import tpl_syn_http_s_base
+--ipset=./lists/ipset-ddosguard-as57724.txt
+--lua-desync=syndata:payload=all:blob=tls_google:tls_mod=rnd,sni=tile0.maps.2gis.com:tcp_ts=-100000:ip_autottl=-2,3-64:ip6_autottl=-2,3-64
+
+--new
+--import tpl_syn_http_s_base
+--ipset=./lists/ipset-digitalocean-as14061.txt
+--lua-desync=syndata:payload=all:blob=tls_google:tls_mod=rnd,sni=www.aida64.com:tcp_ts=-100000:ip_autottl=-2,3-64:ip6_autottl=-2,3-64
+
+--new
+--import tpl_syn_http_s_base
+--ipset=./lists/ipset-fastly-as54113.txt
+--lua-desync=syndata:payload=all:blob=tls_google:tls_mod=rnd,sni=www.firefox.com:tcp_ts=-100000:ip_autottl=-2,3-64:ip6_autottl=-2,3-64
+
+--new
+--import tpl_syn_http_s_base
+--ipset=./lists/ipset-google-as15169.txt ^
+--lua-desync=syndata:payload=all:blob=tls_google:tls_mod=rnd,sni=www.google.com:tcp_ts=-100000:ip_autottl=-2,3-64:ip6_autottl=-2,3-64
+
+--new
+--import tpl_syn_http_s_base
+--ipset=./lists/ipset-gthost-as63023.txt
+--lua-desync=syndata:payload=all:blob=tls_google:tls_mod=rnd,sni=gthost.com:tcp_ts=-100000:ip_autottl=-2,3-64:ip6_autottl=-2,3-64
+
+--new
+--import tpl_syn_http_s_base
+--ipset=./lists/ipset-hetzner-as24940.txt
+--lua-desync=syndata:payload=all:blob=tls_google:tls_mod=rnd,sni=7-zip.org:tcp_ts=-100000:ip_autottl=-2,3-64:ip6_autottl=-2,3-64
+
+--new
+--import tpl_syn_http_s_base
+--ipset=./lists/ipset-hosteurope-as21499.txt
+--lua-desync=syndata:payload=all:blob=tls_google:tls_mod=rnd,sni=www.secureserver.net:tcp_ts=-100000:ip_autottl=-2,3-64:ip6_autottl=-2,3-64
+
+--new
+--import tpl_syn_http_s_base
+--ipset=./lists/ipset-hosteurope-as34011.txt
+--lua-desync=syndata:payload=all:blob=tls_google:tls_mod=rnd,sni=hosteurope.de:tcp_ts=-100000:ip_autottl=-2,3-64:ip6_autottl=-2,3-64
+
+--new
+--import tpl_syn_http_s_base
+--ipset=./lists/ipset-iqweb-as59692.txt
+--lua-desync=syndata:payload=all:blob=tls_google:tls_mod=rnd,sni=ddos-guard.net:tcp_ts=-100000:ip_autottl=-2,3-64:ip6_autottl=-2,3-64
+
+--new
+--import tpl_syn_http_s_base
+--ipset=./lists/ipset-oracle-as31898.txt
+--lua-desync=syndata:payload=all:blob=tls_google:tls_mod=rnd,sni=mysql.com:tcp_ts=-100000:ip_autottl=-2,3-64:ip6_autottl=-2,3-64
+
+--new
+--import tpl_syn_http_s_base
+--ipset=./lists/ipset-telegram-as44907.txt
+--ipset=./lists/ipset-telegram-as59930.txt
+--ipset=./lists/ipset-telegram-as62041.txt
+--ipset=./lists/ipset-telegram-as211157.txt
+--lua-desync=syndata:payload=all:blob=tls_google:tls_mod=rnd,sni=www.onetrust.com:tcp_ts=-100000:ip_autottl=-2,3-64:ip6_autottl=-2,3-64
+
+--new
+--import tpl_syn_http_s_base
+--ipset=./lists/ipset-facebook-as32934.txt
+--lua-desync=syndata:payload=all:blob=tls_google:tls_mod=rnd,sni=www.onetrust.com:tcp_ts=-100000:ip_autottl=-2,3-64:ip6_autottl=-2,3-64
+
+--new
+--import tpl_syn_http_s_base
+--ipset=./lists/ipset-eurobyte-as210079.txt
+--lua-desync=syndata:payload=all:blob=ssh:tcp_ts=-100000:ip_autottl=-2,3-64:ip6_autottl=-2,3-64
+
+--new
+--import tpl_syn_http_s_base
+--ipset=./lists/ipset-ovh-as16276.txt
+--lua-desync=syndata:payload=all:blob=tls_google:tls_mod=rnd,sni=www.onetrust.com:tcp_ts=-100000:ip_autottl=-2,3-64:ip6_autottl=-2,3-64
+
+--new
+--import tpl_syn_http_s_base
+--ipset-exclude=./lists/ipset-special.txt
+--lua-desync=syndata:payload=all:blob=tls_google:tls_mod=rnd,sni=www.google.com:tcp_ts=-100000:ip_autottl=-2,3-64:ip6_autottl=-2,3-64
+
+--new
+--filter-tcp=2100-2110
+--filter-l3=ipv4
+--out-range=-d0
+--ipset=./lists/ipset-asteriosgame.txt
+--lua-desync=fake:payload=all:blob=tls_google:tls_mod=rnd,sni=www.onetrust.com:tcp_ts=-100000:ip_autottl=-2,3-64:ip6_autottl=-2,3-64
+
+--new
+--filter-tcp=1024-65535
+--out-range=-d0
+--ipset=./lists/ipset-ovh-as16276.txt
+--lua-desync=fake:payload=all:blob=tls_google:tls_mod=rnd,sni=www.onetrust.com:tcp_ts=-100000:ip_autottl=-2,3-64:ip6_autottl=-2,3-64
+
+--new
+--filter-tcp=1024-65535
+--out-range=-d0
+--ipset-exclude=./lists/ipset-special.txt
+--lua-desync=fake:payload=all:blob=tls_google:tls_mod=rnd,sni=www.google.com:tcp_ts=-100000:ip_autottl=-2,3-64:ip6_autottl=-2,3-64 ^
+
+--new
+--filter-udp=443
+--filter-l7=quic
+--out-range=-d10
+--payload=quic_initial
+--ipset-exclude=./lists/ipset-special.txt
+--lua-desync=fake:blob=quic_google:tcp_ts=-100000:ip_autottl=-2,3-64:ip6_autottl=-2,3-64
+
+--new
+--filter-udp=500,1024-65535
+--out-range=d1-d1
+--ipset-exclude=./lists/ipset-special.txt
+--lua-desync=fake:payload=all:blob=quic_google:tcp_ts=-100000:ip_autottl=-2,3-64:ip6_autottl=-2,3-64
