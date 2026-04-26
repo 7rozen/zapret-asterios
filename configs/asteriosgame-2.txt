@@ -1,0 +1,23 @@
+--wf-tcp-out=2100-2110
+--wf-udp-out=53
+--wf-udp-in=53
+--wf-filter-lan=0
+--lua-init=@lua\zapret-lib.lua
+--lua-init=@lua\zapret-antidpi.lua
+--lua-init=@lua\custom-dns.lua
+--blob=tls_google:@fakes\tls_clienthello_www_google_com.bin
+
+--filter-tcp=2100-2110
+--filter-l3=ipv4
+--out-range=-d0
+--ipset=lists\ipset-asteriosgame.txt
+--lua-desync=fake:payload=all:blob=tls_google:tls_mod=rnd,sni=www.onetrust.com:tcp_ts=-100000:ip_autottl=-2,3-64:ip6_autottl=-2,3-64
+
+--new
+--filter-udp=53
+--filter-l7=dns
+--in-range=a
+--payload=dns_query,dns_response
+--lua-desync=custom_dns:ip=83.220.169.155
+
+# Comss DNS: 83.220.169.155 195.133.25.16 212.109.195.93
