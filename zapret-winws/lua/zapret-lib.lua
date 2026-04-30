@@ -1749,7 +1749,6 @@ function writefile(filename, data)
 	end
 end
 
-
 -- DISSECTORS
 
 function http_dissect_header(header)
